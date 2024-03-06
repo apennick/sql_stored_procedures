@@ -1,0 +1,25 @@
+USE [WatchReadListenLive]
+GO
+/****** Object:  StoredProcedure [dbo].[USP_Add_Book]    Script Date: 3/6/2024 2:39:33 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   PROCEDURE [dbo].[USP_Add_Book]
+	@PERSON_ID INT,
+	@TITLE varchar(200),
+	@MEDIA_TYPE_ID INT,
+	@SERIES BIT, 
+	@PAGE_COUNT INT,
+	@STAR_RATING NUMERIC(4,2),
+	@FICTION BIT
+AS BEGIN
+	
+	INSERT INTO 
+		Media (PersonID, Title, MediaTypeID, Series, PageCount, StarRating, Fiction)
+	VALUES 
+		(@PERSON_ID, @TITLE, @MEDIA_TYPE_ID, @SERIES, @PAGE_COUNT, @STAR_RATING, @FICTION)
+
+	SELECT 
+		RTRIM(@TITLE)+' added successfully' as message
+END
