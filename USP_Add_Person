@@ -1,0 +1,22 @@
+USE [WatchReadListenLive]
+GO
+/****** Object:  StoredProcedure [dbo].[USP_Add_Person]    Script Date: 3/6/2024 2:41:31 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER   PROCEDURE [dbo].[USP_Add_Person]
+	@FIRST_NAME varchar(25),
+	@MIDDLE_NAME varchar(25),
+	@LAST_NAME varchar(25),
+	@PERSON_TYPE varchar(25)
+AS BEGIN
+	
+	INSERT INTO 
+		Person (FirstName, MiddleName, LastName, PersonType)
+	VALUES 
+		(@FIRST_NAME, @MIDDLE_NAME, @LAST_NAME, @PERSON_TYPE)
+
+	SELECT 
+		RTRIM(@LAST_NAME + ' ' + @PERSON_TYPE) + ' added successfully' as message
+END
