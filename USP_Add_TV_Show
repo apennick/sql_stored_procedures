@@ -1,0 +1,24 @@
+USE [WatchReadListenLive]
+GO
+/****** Object:  StoredProcedure [dbo].[USP_Add_TV_Show]    Script Date: 3/6/2024 2:42:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER     PROCEDURE [dbo].[USP_Add_TV_Show]
+	@PERSON_ID INT,
+	@TITLE varchar(200),
+	@MEDIA_TYPE_ID INT, 
+	@STILL_ON BIT,
+	@NUMBER_OF_EPISODES INT,
+	@STAR_RATING NUMERIC(4,2)
+AS BEGIN
+	
+	INSERT INTO 
+		Media (PersonID, Title, MediaTypeID, StillOn, NumberOfEpisodes, StarRating)
+	VALUES 
+		(@PERSON_ID, @TITLE, @MEDIA_TYPE_ID, @STILL_ON, @NUMBER_OF_EPISODES, @STAR_RATING)
+
+	SELECT 
+		RTRIM(@TITLE)+' TV Show added successfully' as message
+END
